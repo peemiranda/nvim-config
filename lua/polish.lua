@@ -10,3 +10,16 @@ dap.adapters.php = {
   command = "node",
   args = { os.getenv "HOME" .. "/.config/nvim/adapters/vscode-php-debug/out/phpDebug.js" },
 }
+
+vim.opt.clipboard = "unnamedplus"
+if vim.fn.has "wsl" == 1 then
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("Yank", { clear = true }),
+    callback = function() vim.fn.system("clip.exe", vim.fn.getreg '"') end,
+  })
+end
+
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
